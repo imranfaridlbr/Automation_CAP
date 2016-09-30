@@ -1,0 +1,10 @@
+# ignore idea files
+*.png
+.idea/
+.local_run
+reports/
+*.html
+junit/
+cucumber_report/
+cucumber_report/cucumber.html/
+cucumber_report/rerun-cucumber.html/

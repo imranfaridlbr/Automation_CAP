@@ -1,0 +1,34 @@
+require 'cucumber'
+require 'cucumber/rake/task'
+
+
+namespace :profile do
+
+  # how to run the test from terminal
+  # rake profile:test
+  # rake profile:dev
+  # rake profile:uat
+
+  def re_run_failed_tests(profile_name)
+    sh "bundle exec cucumber -p rerun_#{profile_name}" do |ok, result|
+      # be empty to run all tests
+    end
+  end
+
+  def run_profile(profile_name)
+    sh "bundle exec cucumber -p #{profile_name}" do |ok, result|
+      # be empty to run all tests
+    end
+    # wait at least 15 seconds before it starts the failed tests.
+    sleep 5
+    re_run_failed_tests(profile_name)
+  end
+
+  desc 'Run all tests against testing environment'
+  task :test do
+    run_profile('test')
+  end
+
+end
+
+task :default => 'profile:test'
